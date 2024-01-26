@@ -18,13 +18,10 @@ public class MainPage {
     private final By dropDownListLocator = By.className("search-catalog__autocomplete");
     private final By quickNavButtonLocator = By.className("btn-quick-nav");
     private final By cityHeaderLocator = By.className("header__top");
-    private final By footerLocator = By.className("footer");
     private final By jobsLocator = By.xpath("//a[@data-wba-header-name=\"Job\"]");
     private final By menuLocator = By.xpath("//button[contains(@class,'nav-element__burger')]");
-    private final By kidsLineInBurgerMenuLocator = By.xpath("//li[@data-menu-id='115']");
     private final By womenLineInBurgerMenuLocator = By.xpath("//a[@href='https://www.wildberries.ru/catalog/zhenshchinam']");
     private final By dropDownListFromBurgerMenuLocator = By.xpath("//div[contains(@class,'menu-burger__main')]");
-    private final By jeansInBurgerLocator = By.xpath("(//a[text()=\"Джинсы\"])[1]");
     private final By mainBannerLocator = By.xpath("//div[contains(@class,'main-page__banner')]");
     private final By swiperButtonNextOnMainBannerLocator = By.xpath("//button[@class='swiper-button-next']");
     private final By swiperButtonPrevOnMainBannerLocator = By.xpath("//button[@class='swiper-button-prev']");
@@ -61,25 +58,21 @@ public class MainPage {
         }
     }
 
+    private boolean checkWebElementVisibility(By locator) {
+        try {
+            WebElement webElement = driver.findElement(locator);
+            wait.until(ExpectedConditions.visibilityOf(webElement));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public boolean dropDownListVisible() {
-//        try {
-//            WebElement list = driver.findElement(dropDownListLocator);
-//            wait.until(ExpectedConditions.visibilityOf(list));
-//            return true;
-//        }catch (Exception e) {
-//            return false;
-//        }
         return checkWebElementVisibility(dropDownListLocator);
     }
 
     public boolean cityHeaderVisible() {
-//        try {
-//            WebElement cityHeader = driver.findElement(cityHeaderLocator);
-//            wait.until(ExpectedConditions.visibilityOf(cityHeader));
-//            return true;
-//        }catch (Exception e) {
-//            return false;
-//        }
         return checkWebElementVisibility(cityHeaderLocator);
     }
 
@@ -91,14 +84,12 @@ public class MainPage {
         return checkWebElementVisibility(popUpCountryWithCurrencyLocator);
     }
 
-    private boolean checkWebElementVisibility(By locator) {
-        try {
-            WebElement webElement = driver.findElement(locator);
-            wait.until(ExpectedConditions.visibilityOf(webElement));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    public Boolean swiperButtonPrevOnMainBannerVisible() {
+        return checkWebElementVisibility(swiperButtonPrevOnMainBannerLocator);
+    }
+
+    public Boolean swiperButtonNextOnMainBannerVisible() {
+        return checkWebElementVisibility(swiperButtonNextOnMainBannerLocator);
     }
 
     public String getPageTitle() {
@@ -129,12 +120,6 @@ public class MainPage {
         jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
-    public void scrollToFooter() {
-        WebElement footer = driver.findElement(footerLocator);
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].scrollIntoView();", footer);
-    }
-
     public VacanciesPage clickVacancies() {
         WebElement vacancies = driver.findElement(jobsLocator);
         vacancies.click();
@@ -144,11 +129,6 @@ public class MainPage {
     public void clickMenu() {
         WebElement menu = driver.findElement(menuLocator);
         menu.click();
-    }
-
-    public void clickKidsinBurgerMenu() {
-        WebElement kidsLine = driver.findElement(kidsLineInBurgerMenuLocator);
-        kidsLine.click();
     }
 
     public ForWomenPage clickForWomenInBurgerMenu() {
@@ -163,37 +143,12 @@ public class MainPage {
         return new BannerResultPage(driver);
     }
 
-    public void clickSwiperButtonOnMainBanner() {
-        WebElement swiperButton = driver.findElement(swiperButtonPrevOnMainBannerLocator);
-        swiperButton.click();
-    }
-
-    public void hoverOverMainBanner(){
+    public void hoverOverMainBanner() {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(mainBannerLocator)).perform();
     }
 
-    public Boolean swiperButtonPrevOnMainBannerVisible() {
-        try {
-            WebElement swiperButton = driver.findElement(swiperButtonPrevOnMainBannerLocator);
-            wait.until(ExpectedConditions.visibilityOf(swiperButton));
-            return true;
-        }catch (Exception e) {
-            return false;
-        }
-    }
-
-    public Boolean swiperButtonNextOnMainBannerVisible() {
-        try {
-            WebElement swiperButton = driver.findElement(swiperButtonNextOnMainBannerLocator);
-            wait.until(ExpectedConditions.visibilityOf(swiperButton));
-            return true;
-        }catch (Exception e) {
-            return false;
-        }
-    }
-
-    public void hoverOverSignIn(){
+    public void hoverOverSignIn() {
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(signInLocator)).perform();
     }
@@ -208,6 +163,5 @@ public class MainPage {
         button.click();
         return new BasketPage(driver);
     }
-
 
 }

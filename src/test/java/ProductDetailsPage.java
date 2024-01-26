@@ -20,13 +20,11 @@ public class ProductDetailsPage {
     }
 
     private final By productPageContentLocator = By.className("product-page");
-    //private final By priceHistorySectionLocator = By.className("price-history");
     private final By priceHistoryButtonLocator = By.xpath("//button[@class='price-history__btn']");
     private final By popUpHistoryPriceLocator = By.xpath("//div[contains(@class,'popup-history-price')]");
     private final By priceBlockLocator = By.xpath("//div[@class='price-block'][1]");
     private final By likeButtonLocator = By.xpath("//button[@aria-label='Добавить в избранное']");
 
-    private final By addButtonLocator = By.xpath("//button[contains(@class,'order__btn-buy')]");
 
     public void openPage() {
         driver.get("https://www.wildberries.ru/catalog/64890494/detail.aspx");
@@ -62,16 +60,6 @@ public class ProductDetailsPage {
         }
     }
 
-    public boolean checkPriceBlockVisible() {
-        try {
-            WebElement price = driver.findElement(priceBlockLocator);
-            wait.until(ExpectedConditions.visibilityOf(price));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     public Boolean likeButtonVisible() {
         try {
             WebElement button = driver.findElement(likeButtonLocator);
@@ -81,11 +69,4 @@ public class ProductDetailsPage {
             return false;
         }
     }
-
-    public void hoverOverLike() {
-        Actions actions = new Actions(driver);
-        WebElement like = driver.findElement(likeButtonLocator);
-        actions.moveToElement(like).perform();
-    }
-
 }

@@ -228,7 +228,7 @@ public class WildberriesTests {
     public void checkEmptyBasket() {
         MainPage mainPage = new MainPage(webDriver);
         mainPage.openAndWaitForMainPageContent();
-        BasketPage page= mainPage.clickBasketButton();
+        BasketPage page = mainPage.clickBasketButton();
         String validationSign = page.checkSignOfEmptyBasket();
         Assert.assertTrue(validationSign.contains("В корзине пока пусто"));
     }
@@ -244,15 +244,13 @@ public class WildberriesTests {
         Assert.assertTrue(sign.contains("В корзине"));
     }
 
-//    @After
-//    public void closedDriver() {
-//        webDriver.close();
-//    }
+    @After
+    public void closedDriver() {
+        webDriver.close();
+    }
 
 }
 
-    //Тест 13 - увеличить количество товара в корзине
-    //Тест 14 - удалить товар из корзины
 
 
 

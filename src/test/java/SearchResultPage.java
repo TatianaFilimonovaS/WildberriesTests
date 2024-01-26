@@ -17,7 +17,6 @@ public class SearchResultPage {
 
     private final By catalogPageLocator = By.id("catalog");
     private final By firstCardLocator = By.xpath("//article[contains(@class,product-card)][1]");
-    ////div[@class='catalog-page']//div[@class='product-card-list']//article[contains(@class,product-card)][1]
     private final By cardSizeBigButtonLocator = By.xpath("//a[contains(@class,'card-sizes__btn--big')]");
     private final By quickBasketButtonOnFirstProductLocator = By.xpath("//a[contains(@class,'product-card__add-basket')][1]");
 
@@ -29,17 +28,6 @@ public class SearchResultPage {
         String url = driver.getCurrentUrl();
         return url;
     }
-
-    /*public boolean catalogVisible() {
-        try {
-            WebElement catalog = driver.findElement(catalogPageLocator);
-            wait.until(ExpectedConditions.visibilityOf(catalog));
-            return true;
-        }catch (Exception e) {
-            return false;
-        }
-
-    }*/
 
     public void waitForCatalog() {
         wait.until(ExpectedConditions.presenceOfElementLocated(catalogPageLocator));

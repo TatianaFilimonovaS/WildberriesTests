@@ -23,11 +23,6 @@ public class AutorisationPage {
         driver.get("https://www.wildberries.ru/security/login?returnUrl=https%3A%2F%2Fwww.wildberries.ru%2Fcatalog%2F98365489%2Fdetail.aspx");
     }
 
-    public void clickInputPhoneNumber() {
-        WebElement input = driver.findElement(phoneNumberInput);
-        input.click();
-    }
-
     public void inputPhoneNumber(String s) {
         wait.until(ExpectedConditions.presenceOfElementLocated(phoneNumberInput));
         WebElement input = driver.findElement(phoneNumberInput);

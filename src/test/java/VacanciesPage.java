@@ -42,19 +42,9 @@ public class VacanciesPage {
     }
 
     public VkontaktePage vkLinkClick() {
-        //String vacanciesPage =driver.getWindowHandle();
         WebElement vkLink = driver.findElement(vkLinkLocator);
         vkLink.click();
         switchTab(1);
-
-
-        //ArrayList<String> windowHandles = new ArrayList<String>(driver.getWindowHandles());
-        //windowHandles.remove(vacanciesPage);
-        //String vkTabWindowHandle = windowHandles.get(1);
-        //driver.switchTo().window(vkTabWindowHandle);
-
-
-
         return new VkontaktePage(driver);
     }
 
